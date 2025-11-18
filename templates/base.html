@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Buscador de alimentos</title>
+  <link
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+    rel="stylesheet"
+  />
+</head>
+<body class="bg-light d-flex flex-column align-items-center">
+
+  
+  <div class="card mt-5" style="width: 18rem;">
+    <img src="{{ url_for('static', filename='imagen/1.webp') }}" class="card-img-top" alt="Logo alimentos">
+    <div class="card-body text-center">
+      <h5 class="card-title">Buscador de alimentos</h5>
+      <p class="card-text"> alimentos para hambreados</p>
+    </div>
+  </div>
+
+
+  <nav class="navbar bg-body-tertiary mt-5 w-100">
+    <div class="container d-flex justify-content-center">
+      <form class="d-flex" role="search" method="POST" action="{{ url_for('search') }}">
+        <input class="form-control me-2" type="search" name="alimento" placeholder="Buscar alimento" aria-label="Buscar" />
+        <button class="btn btn-outline-success" type="submit">Buscar</button>
+      </form>
+    </div>
+  </nav>
+
+
+  <div class="container mt-4">
+    {% with messages = get_flashed_messages(with_categories=true) %}
+      {% if messages %}
+        {% for category, message in messages %}
+          <div class="alert alert-{{ 'danger' if category == 'error' else 'success' }} text-center" role="alert">
+            {{ message }}
+          </div>
+        {% endfor %}
+      {% endif %}
+    {% endwith %}
+  </div>
+
+
+  <div class="container mt-4 mb-5">
+    {% block content %}{% endblock %}
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

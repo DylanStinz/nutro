@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+
+{% block content %}
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h3 class="card-title">{{ alimento.description }}</h3>
+      <p><strong>FDC ID:</strong> {{ alimento.fdcId }}</p>
+      <p><strong>Marca:</strong> {{ alimento.brand }}</p>
+      <p><strong>Ingredientes:</strong> {{ alimento.ingredients }}</p>
+    </div>
+  </div>
+
+
+  <h4>Nutrientes</h4>
+  <div class="row row-cols-1 row-cols-md-2 g-3">
+    {% for n in alimento.nutrients %}
+    <div class="col">
+      <div class="card h-100">
+        <div class="card-body">
+          <h6 class="card-title">{{ n.name }}</h6>
+          <p class="card-text">{{ n.value }} {{ n.unit }}</p>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="mt-4 text-center">
+    <a href="{{ url_for('base') }}" class="btn btn-primary">Volver</a>
+  </div>
+{% endblock %}
